@@ -9,6 +9,8 @@ import { RiLockPasswordFill } from 'react-icons/ri';
 import * as Yup from 'yup'
 import { AiFillFacebook, AiOutlineTwitter, AiFillGithub } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+
 interface FormProps {
     email: string;
     password: string;
@@ -34,8 +36,9 @@ export const Login = () => {
 
     const { handleSubmit } = methods
 
-    const handleSubmitForm = (data: FormProps) => {
-        console.log(data);
+    const handleSubmitForm = async (data: FormProps) => {
+        const user= await axios.post(`http://localhost:3001/api/auth/singIn`,data)
+        
     }
 
     return (
