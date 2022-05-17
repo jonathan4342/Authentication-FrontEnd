@@ -8,7 +8,11 @@ import { BsGoogle } from 'react-icons/bs';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import * as Yup from 'yup'
 import { AiFillFacebook, AiOutlineTwitter, AiFillGithub } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
+
 interface FormProps {
     email: string;
     password: string;
@@ -31,13 +35,19 @@ export const Login = () => {
     const methods = useForm<FormProps>({
         resolver: yupResolver(LoginSchema)
     })
+    const navigate = useNavigate();
+
+    const [data , setData] = useState(null)
 
     const { handleSubmit } = methods
 
-    const handleSubmitForm = (data: FormProps) => {
-        console.log(data);
+    const handleSubmitForm = async(data: FormProps) => {
+        const dataI= await axios.post(`http://localhost:3001/api/auth/signIn`,data)
+        setData(dataI.data)
+        window.localStorage.setItem('userData', JSON.stringify(dataI.data))
+        navigate('/user')
     }
-
+    console.log(data)
     return (
         <FormProvider
             {...methods}
@@ -68,7 +78,6 @@ export const Login = () => {
                         </DivInputs>
                         <ButtonLogin
                             type="submit"
-
                         >
                             Login
                         </ButtonLogin>

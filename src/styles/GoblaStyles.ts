@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 
-
+interface Props{
+    paddingTop?: string
+}
 export const ContainerLogin = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top:80px ;
+    padding-top:${({paddingTop}:Props)=>paddingTop ? paddingTop : '80px'} ;
     `;
 
 export const ContainerLoginForm = styled.div`
@@ -24,7 +26,7 @@ export const ContainerLoginForm = styled.div`
         font-family:Noto Sans;
         font-size: 18px;
         font-weight: 600;
-        color:#E0E0E0
+        color:#333333
     }
     .div{
         display: flex;
@@ -57,9 +59,11 @@ export const DivInputs = styled.div`
     width: 356px;
     height:48px;
     display: flex;
+    position: relative;
     
     .svg{
-        position: relative;
+        
+        position: absolute;
         top: 5px;
         left: 5px;
         font-size: 35px;
@@ -67,7 +71,7 @@ export const DivInputs = styled.div`
     }
     input{
         border: none;
-        position: absolute;
+        
         width: 356px;
         height:45px;
         border-radius: 8px;
@@ -102,7 +106,6 @@ export const DivInputs = styled.div`
     `;
 
     export const ButtonRedes = styled.button`
-    background-color: #333333;
     color: #828282;
     border: 1px solid #828282;
     Width:50px;
@@ -111,4 +114,22 @@ export const DivInputs = styled.div`
     padding-top: 7px;
     font-size: 35px;
     cursor: pointer;
+    `;
+
+    export const Navbar= styled.div`
+    display: flex;
+    flex-direction: row;
+    `;
+
+    export const RedirectItem = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top:100px;
+    gap:1.5rem;
+    font-family:Noto Sans;
+        font-size: 18px;
+        font-weight: 600;
+        color:#333333
     `;
