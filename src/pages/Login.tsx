@@ -8,7 +8,7 @@ import { BsGoogle } from 'react-icons/bs';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import * as Yup from 'yup'
 import { AiFillFacebook, AiOutlineTwitter, AiFillGithub } from 'react-icons/ai';
-import { Link,useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
@@ -37,15 +37,17 @@ export const Login = () => {
     })
     const navigate = useNavigate();
 
-    const [data , setData] = useState(null)
+    const [data, setData] = useState(null)
 
     const { handleSubmit } = methods
 
-    const handleSubmitForm = async(data: FormProps) => {
-        const dataI= await axios.post(`http://localhost:3001/api/auth/signIn`,data)
+    const handleSubmitForm = async (data: FormProps) => {
+        const dataI = await axios.post(`http://localhost:3001/api/auth/signIn`, data)
         setData(dataI.data)
         window.localStorage.setItem('userData', JSON.stringify(dataI.data))
+        toast.success(`Welcome`)
         navigate('/user')
+
     }
     console.log(data)
     return (
@@ -86,15 +88,6 @@ export const Login = () => {
                     <ContainerRedes>
                         <ButtonRedes>
                             <BsGoogle />
-                        </ButtonRedes>
-                        <ButtonRedes>
-                            <AiFillFacebook />
-                        </ButtonRedes>
-                        <ButtonRedes>
-                            <AiOutlineTwitter />
-                        </ButtonRedes>
-                        <ButtonRedes>
-                            <AiFillGithub />
                         </ButtonRedes>
                     </ContainerRedes>
                     <div className='div'>Adready a member?<Link to='/'>Login</Link></div>
